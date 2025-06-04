@@ -1,95 +1,688 @@
-# 51game
-
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+<html lang="en">
 <head>
-<title>Attention Required! | Cloudflare</title>
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name="robots" content="noindex, nofollow" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="stylesheet" id="cf_styles-css" href="/cdn-cgi/styles/cf.errors.css" />
-<!--[if lt IE 9]><link rel="stylesheet" id='cf_styles-ie-css' href="/cdn-cgi/styles/cf.errors.ie.css" /><![endif]-->
-<style>body{margin:0;padding:0}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
+        html {
+            font-size: 14px;
+        }
 
-<!--[if gte IE 10]><!-->
-<script>
-  if (!navigator.cookieEnabled) {
-    window.addEventListener('DOMContentLoaded', function () {
-      var cookieEl = document.getElementById('cookie-alert');
-      cookieEl.style.display = 'block';
-    })
-  }
-</script>
-<!--<![endif]-->
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 110px; /* Add padding at the bottom to ensure content is visible above the nav bar */
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
+        }
 
+        .header {
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
+        .header h1 {
+            font-size: 16px;
+        }
+
+        .commission-section {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: transparent !important;
+            padding-bottom: 0;
+            padding-top: 0;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .commission-section::after {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; right: 0;
+            height: 300px;
+            background: linear-gradient(to bottom right, #ffcb2d, #ffe083);
+            z-index: 0;
+            pointer-events: none;
+            transition: height 0.2s;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .commission-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .commission-box {
+            background: transparent;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            padding-bottom: 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        .amount {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .stats-container {
+            display: flex;
+            margin: 15px;
+            gap: 15px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-column {
+            flex: 1;
+            background: rgb(255, 255, 255);
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-column h3 {
+            font-size: 14px;
+            background: rgb(255, 0, 0);
+            color: rgb(255, 255, 255);
+            text-align: left;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 15px;
+            margin: 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            margin: 10px 0;
+            padding: 0 15px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .invitation-button {
+            background: #ffcb2d;
+            color: white;
+            padding: 13px;
+            text-align: center;
+            margin: 15px auto;
+            border-radius: 40px;
+            font-weight: bold;
+            width: 350px;
+            max-width: 90%;
+        }
+
+        .menu-list {
+            margin: 10px 15px 15px 15px; /* Adjust top margin */
+            background: #f6f7f7;
+            padding: 0; /* Remove padding */
+        }
+
+        .menu-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .menu-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .promotion-data {
+            background: white;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+            text-align: center;
+        }
+        
+        .nav-image {
+            width: 100%;
+            max-width: 600px;
+            height: 90px;
+            object-fit: cover;
+            margin-bottom: -5px;
+        }
+
+        .stats-container.joined-stats {
+            display: flex;
+            margin: 15px;
+            gap: 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        .stats-container.joined-stats .stats-column {
+            border-radius: 0;
+            box-shadow: none;
+            border-right: 1px solid #f0f0f0;
+            padding: 0;
+            background: #fff;
+        }
+
+        .stats-container.joined-stats .stats-column:last-child {
+            border-right: none;
+        }
+
+        .stats-container.joined-stats .stats-column h3 {
+            border-radius: 0;
+        }
+
+        @media (max-width: 700px) {
+            .stats-container.joined-stats {
+                flex-direction: column;
+                border-radius: 8px;
+            }
+            .stats-container.joined-stats .stats-column {
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .stats-container.joined-stats .stats-column:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .subordinate-stats-card {
+            position: relative;
+            z-index: 2;
+            margin-top: -10px;
+            width: 100%;
+            max-width: 430px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: none;
+            border: none;
+        }
+
+        .subordinate-stats-header {
+            display: flex;
+            background: #ffcb2d;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .subordinate-stats-header .header-col {
+            flex: 1;
+            padding: 10px 0;
+            border-right: 1px solid #fff3;
+        }
+
+        .subordinate-stats-header .header-col:last-child {
+            border-right: none;
+        }
+
+        .subordinate-stats-body {
+            display: flex;
+            background: #fff;
+        }
+
+        .stats-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0 8px 0;
+            font-size: 13px;
+        }
+
+        .stat-main {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 7px;
+            margin-bottom: 0;
+            color: #222 !important;
+        }
+
+        .stat-main.green {
+            color: #222 !important;
+        }
+
+        .stat-main.orange {
+            color: #222 !important;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #222;
+            margin-bottom: 0;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 500px) {
+            .subordinate-stats-card {
+                width: calc(98vw - 6px);
+                max-width: calc(100vw - 6px);
+                margin: 12px 1vw 0 1vw;
+            }
+            .subordinate-stats-header {
+                font-size: 15px;
+            }
+            .stat-main {
+                font-size: 15px;
+            }
+            .stat-label {
+                font-size: 11px;
+            }
+        }
+
+        .stats-box .stat .value.deposit-number {
+            color: #00c853 !important; /* green */
+        }
+        .stats-box .stat .value.deposit-amount {
+            color: #ffd600 !important; /* yellow */
+        }
+
+        .stat-main.deposit-number {
+            color: #00c853 !important; /* green */
+        }
+        .stat-main.deposit-amount {
+            color: #ffd600 !important; /* yellow */
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .menu-item-left span.menu-text {
+            color: #0a2342;
+            font-size: 17px;
+            font-weight: 400;
+        }
+        .menu-item {
+            background: #fff;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            box-shadow: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 24px 22px 18px;
+        }
+
+        .invitation-code {
+            font-size: 12px;
+            color: #0a2342;
+            font-weight: 500;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .copy-icon {
+            font-size: 13px;
+            vertical-align: middle;
+            color: #0a2342;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .menu-text {
+            color: #0a2342;
+            font-size: 13px !important;
+            font-weight: 400;
+        }
+
+        .promotion-data-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 18px 10px 18px;
+            margin: 24px 12px 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #f2f3f7;
+            max-width: 500px;
+        }
+
+        .promotion-header {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .promotion-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 8px;
+        }
+
+        .promotion-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 0;
+            border-top: 1px solid #f2f3f7;
+            padding-top: 10px;
+        }
+
+        .promotion-stat {
+            text-align: center;
+            padding: 8px 0;
+            color: #6b7280;
+            font-size: 15px;
+            border-right: 1px solid #f2f3f7;
+        }
+
+        .promotion-stat:nth-child(2n) {
+            border-right: none;
+        }
+
+        .promotion-value {
+            font-size: 19px;
+            color: #222;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .promotion-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .nav-icon-game {
+            width: 85px;
+            height: 40px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        button, 
+        input,
+        select,
+        a,
+        .menu-item,
+        .invitation-button,
+        .copy-icon,
+        .nav-item {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Partner rewards and invitation code styles */
+        .rewards-section {
+            margin: 15px 15px 0 15px; /* Remove bottom margin */
+            padding: 0; /* Remove padding */
+            background: #f6f7f7;
+        }
+        
+        .rewards-card {
+            background: #fff;
+            border-radius: 14px;
+            margin: 0 0 10px 0; /* Reduce bottom margin to match menu-item spacing */
+            box-shadow: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 24px 22px 18px;
+        }
+        
+        .rewards-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .rewards-icon {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .rewards-title {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .arrow-icon {
+            font-size: 18px;
+            color: #0a2342;
+        }
+        
+        .copy-card .rewards-left {
+            flex: 1;
+        }
+        
+        .copy-code {
+            color: #777;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .copy-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+        }
+
+        .rewards-card, .copy-card {
+            background: #fff;
+            border-radius: 14px;
+            margin: 0 0 10px 0; /* Reduce bottom margin to match menu-item spacing */
+            box-shadow: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 24px 22px 18px;
+        }
+
+        .rewards-card:last-child {
+            margin-bottom: 16px; /* Match spacing between sections */
+        }
+
+        .rewards-left {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Adjust spacing */
+        }
+
+        .rewards-icon {
+            width: 24px; /* Match icon size */
+            height: 24px;
+        }
+
+        .rewards-title {
+            font-size: 14px; /* Match text size */
+            color: #0a2342;
+            font-weight: 400;
+        }
+
+        .copy-code {
+            color: #0a2342;
+            font-size: 14px; /* Match text size */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 <body>
-  <div id="cf-wrapper">
-    <div class="cf-alert cf-alert-error cf-cookie-error" id="cookie-alert" data-translate="enable_cookies">Please enable cookies.</div>
-    <div id="cf-error-details" class="cf-error-details-wrapper">
-      <div class="cf-wrapper cf-header cf-error-overview">
-        <h1 data-translate="block_headline">Sorry, you have been blocked</h1>
-        <h2 class="cf-subheadline"><span data-translate="unable_to_access">You are unable to access</span> 51game5.com</h2>
-      </div><!-- /.header -->
+    <div class="header">
+        <h1>Agency</h1>
+        <img src="filter-icon.png" alt="Filter Icon" style="height:32px;width:32px;object-fit:contain;" />
+    </div>
 
-      <div class="cf-section cf-highlight">
-        <div class="cf-wrapper">
-          <div class="cf-screenshot-container cf-screenshot-full">
-            
-              <span class="cf-no-screenshot error"></span>
-            
-          </div>
+    <div class="commission-section" id="commissionSection">
+        <div class="commission-box">
+            <div class="amount">265.76</div>
+            <div class="commission-label" style="color:#ffcb2d;background:#fff;padding:4px 18px;border-radius:20px;display:inline-block;font-size:14px;">
+                Yesterday's total commission
+            </div>
+            <div class="commission-subtitle" style="color:#fff;font-size:13px;margin-top:8px;">
+                Upgrade the level to increase commission income
+            </div>
         </div>
-      </div><!-- /.captcha-container -->
-
-      <div class="cf-section cf-wrapper">
-        <div class="cf-columns two">
-          <div class="cf-column">
-            <h2 data-translate="blocked_why_headline">Why have I been blocked?</h2>
-
-            <p data-translate="blocked_why_detail">This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or malformed data.</p>
-          </div>
-
-          <div class="cf-column">
-            <h2 data-translate="blocked_resolve_headline">What can I do to resolve this?</h2>
-
-            <p data-translate="blocked_resolve_detail">You can email the site owner to let them know you were blocked. Please include what you were doing when this page came up and the Cloudflare Ray ID found at the bottom of this page.</p>
-          </div>
+        <div style="height: 24px;"></div>
+        <div class="subordinate-stats-card" id="subordinateStatsCard">
+            <div class="subordinate-stats-header">
+                <div class="header-col">Direct</div>
+                <div class="header-col">Team subordinates</div>
+            </div>
+            <div class="subordinate-stats-body">
+                <div class="stats-col">
+                    <div class="stat-main">252</div>
+                    <div class="stat-label">number of register</div>
+                    <div class="stat-main deposit-number">234</div>
+                    <div class="stat-label">Deposit number</div>
+                    <div class="stat-main deposit-amount">182590</div>
+                    <div class="stat-label">Deposit amount</div>
+                    <div class="stat-main">210</div>
+                    <div class="stat-label">Number of people making<br>first deposit</div>
+                </div>
+                <div class="stats-col">
+                    <div class="stat-main">429</div>
+                    <div class="stat-label">number of register</div>
+                    <div class="stat-main deposit-number">392</div>
+                    <div class="stat-label">Deposit number</div>
+                    <div class="stat-main deposit-amount">321650</div>
+                    <div class="stat-label">Deposit amount</div>
+                    <div class="stat-main">375</div>
+                    <div class="stat-label">Number of people making<br>first deposit</div>
+                </div>
+            </div>
         </div>
-      </div><!-- /.section -->
+    </div>
 
-      <div class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
-  <p class="text-13">
-    <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold">9486ed2ccd15939a</strong></span>
-    <span class="cf-footer-separator sm:hidden">&bull;</span>
-    <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
-      Your IP:
-      <button type="button" id="cf-footer-ip-reveal" class="cf-footer-ip-reveal-btn">Click to reveal</button>
-      <span class="hidden" id="cf-footer-ip">2604:a880:800:14::6c25:3000</span>
-      <span class="cf-footer-separator sm:hidden">&bull;</span>
-    </span>
-    <span class="cf-footer-item sm:block sm:mb-1"><span>Performance &amp; security by</span> <a rel="noopener noreferrer" href="https://www.cloudflare.com/5xx-error-landing" id="brand_link" target="_blank">Cloudflare</a></span>
-    
-  </p>
-  <script>(function(){function d(){var b=a.getElementById("cf-footer-item-ip"),c=a.getElementById("cf-footer-ip-reveal");b&&"classList"in b&&(b.classList.remove("hidden"),c.addEventListener("click",function(){c.classList.add("hidden");a.getElementById("cf-footer-ip").classList.remove("hidden")}))}var a=document;document.addEventListener&&a.addEventListener("DOMContentLoaded",d)})();</script>
-</div><!-- /.error-footer -->
+    <div class="invitation-button">INVITATION LINK</div>
 
+    <div class="rewards-section">
+        <div class="rewards-card">
+            <div class="rewards-left">
+                <img src="icons/partner-rewards.png" alt="Partner Rewards" class="rewards-icon">
+                <div class="rewards-title">Partner rewards</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">arrow_forward_ios</span>
+        </div>
+        
+        <div class="rewards-card copy-card">
+            <div class="rewards-left">
+                <img src="icons/copy-code.png" alt="Copy Invitation Code" class="rewards-icon">
+                <div class="rewards-title">Copy invitation code</div>
+            </div>
+            <div class="copy-code">
+                428253684196
+                <img src="icons/copy-icon.png" alt="Copy" class="copy-icon">
+            </div>
+        </div>
+    </div>
 
-    </div><!-- /#cf-error-details -->
-  </div><!-- /#cf-wrapper -->
-
-  <script>
-  window._cf_translation = {};
-  
-  
-</script>
-
-</body>
-</html>
+    <div class="menu-list">
+        <a href="subordinate-data.html" style="text-decoration:none;color:inherit;">
+            <div class="menu-item">
+                <div class="menu-item-left">
+                    <img src="icons/subordinate-data.png" alt="Subordinate data" class="menu-icon" />
+                    <span class="menu-text">Subordinate data</span>
+                </div>
+                <span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">arrow_forward_ios</span>
+            </div>
+        </a>
+        <a href="#" style="text-decoration:none;color:inherit;">
+            <div class="menu-item">
+                <div class="menu-item-left">
+                    <img src="icons/commission-detail.png" alt="Commission detail" class="menu-icon" />
+                    <span class="menu-text">Commission detail</span>
+                </div>
+                <span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">arrow_forward_ios</span>
+            </div>
+        </a>
+        <a href="#" style="text-decoration:none;color:inherit;">
+            <div class="menu-item">
+                <div class="menu-item-left">
+                    <img src="icons/invitation-rules.png" alt="Invitation rules" class="menu-icon" />
+                    <span class="menu-text">Invitation rules</span>
+                </div>
+                <span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">arrow_forward_ios</span>
+            </div>
+        </a>
+        <a href="#" style="text-decoration:none;color:inherit;">
+            <div class="menu-item">
+                <div class="menu-item-left">
+                    <img src="icons/customer-service.png" alt="Agent line customer service" class="menu-icon" />
+                    <span class="menu-text">Agent line customer service</span>
+                </div>
+                <span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">arrow_forward_ios</span>
+            </div>
+        </a>
+        <a href="#" style="text-decoration:none;">
+            <div class="menu-item">
+         
